@@ -1,0 +1,1809 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="dashboard.png">
+  <title>Curricula</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" 
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<script src="https://code.jquery.com/jquery-3.6.2.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+  <link href="styles.css" rel="stylesheet"> <!-- Das externe CSS -->
+
+</head>
+<body>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<br>
+  <center><h1 class="card-title" style="color: dark">Übersicht der Curricula</h1></center>
+  <br>
+
+  <style>
+    .profile-pic {
+      width: 200px;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 50%;
+      margin: 0 auto; /* Zentriert das Bild horizontal */
+      display: block;
+    }
+	
+    .calendar {
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      padding: 10px;
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    .month-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .prev,
+    .next {
+      cursor: pointer;
+    }
+
+  .weekdays {
+    display: flex;
+    justify-content: space-between;
+    background-color: #f2f2f2;
+    padding: 5px;
+    border-radius: 5px;
+  }
+
+  .weekdays div {
+    flex-basis: calc(100% / 7);
+    text-align: center;
+    border: 1px solid #ccc; /* Border for weekdays for clarity */
+  }
+
+  .days {
+    display: grid; /* Change display to grid */
+    grid-template-columns: repeat(7, 1fr); /* Define 7 equal columns */
+    gap: 5px;
+  }
+
+  .days div {
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 5px;
+    height: 80px;
+    display: flex;
+    flex-direction: column;
+  }
+
+    .event {
+      font-size: 10px;
+      color: red;
+      margin-top: auto;
+    }
+	
+	body {
+  background-image: url('background.png'); /* Replace 'your-image-path.jpg' with your image file */
+  background-size: cover; /* Ensures the image covers the entire background */
+  background-repeat: no-repeat; /* Prevents the image from repeating */
+    background-position: center center; /* Centers the background image */
+  background-color: rgba(255, 255, 255, 0.3); /* Adjust the last value (0.8) for transparency */
+}
+
+.card {
+  border-radius: 15px; /* Adjust the value to control the roundness */
+}
+
+.today {
+  background-color: #D3D3D3; /* Hier Farbe Ihrer Wahl einsetzen */
+  border-radius: 50%;
+}
+
+    .info-button {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+    }
+
+  .info-button:hover i {
+    color: #fff; /* Set the color on hover */
+  }
+    .info-button i {
+      margin-top: 2px;
+    }
+	
+.custom-table-rounded {
+  border-collapse: separate;
+  border-spacing: 0;
+  width: 100%;
+  border-radius: 15px; /* Adjust the value to control the roundness */
+  overflow: hidden;
+}
+
+.custom-table-rounded th,
+.custom-table-rounded td {
+  border: 1px solid #dee2e6; /* Use the appropriate border color */
+}
+
+.custom-table-rounded thead th:first-child,
+.custom-table-rounded tbody td:first-child {
+  border-left: none; /* Remove left border for first column */
+}
+
+.custom-table-rounded thead th:last-child,
+.custom-table-rounded tbody td:last-child {
+  border-right: none; /* Remove right border for last column */
+}
+
+.highlight-row {
+  background-color: #FFD4A1;
+}
+
+        /* Optional: Adjust styles as needed */
+        #creditsCard {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            max-width: 200px;
+        }
+
+  </style>
+ 
+ <div id="creditsCard" class="card">
+    <div class="card-body">
+        <p class="card-text">Christiaaaan © 2024</p>
+        <!-- Add more credits as needed -->
+    </div>
+</div>
+
+    <style>
+    .info-button {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background-color: #3498db;
+      color: white;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+    }
+
+  .info-button:hover i {
+    color: #fff; /* Set the color on hover */
+  }
+    .info-button i {
+      margin-top: 2px;
+    }
+	
+	        /* Style for the speech bubble */
+        #speechBubble {
+            display: none;
+            position: fixed;
+            top: 50px;
+            left: 70px;
+            background-color: #3498db;
+            color: #fff;
+            padding: 15px;
+            border-radius: 10px;
+            max-width: 250px;
+            z-index: 999; /* Ensure the speech bubble is above other elements */
+        }
+		
+		
+        /* Show speech bubble when hovering over the info button */
+        .info-button:hover + #speechBubble,
+        #speechBubble:hover {
+            display: block;
+        }
+    </style>
+	
+<!-- Info Button with Font Awesome icon -->
+<a href="#" class="info-button" id="infoButton">
+  <i class="fas fa-info"></i>
+</a>
+
+<!-- Speech Bubble -->
+<div id="speechBubble">
+    <p>Die Informationen zu den Curricula wurden den Teilcurricula <em>(verlinkt beim jeweiligen Fach)</em> des entsprechenden UF der <b>Universität Wien</b> entnommen!</p>
+</div>
+
+
+
+
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-body">
+
+      <h3 class="card-title" data-toggle="collapse" href="#collapseBodyABGPM">Allgemeine Bildungswissenschaften (LA Sek. Bachelor)</h3>
+      <div class="collapse" id="collapseBodyABGPM">
+        <p>
+          <div class="card-body">
+            <!-- Dropdown menu for filtering -->
+            <div class="form-group">
+                <label for="filterSelect">Filter by Semester:</label>
+                <select class="form-control" id="filterSelect">
+                    <option value="all" selected>All</option>
+                    <option value="1">1. Semester</option>
+                    <option value="2">2. Semester</option>
+                    <option value="3">3. Semester</option>
+                    <option value="4">4. Semester</option>
+                    <option value="5">5. Semester</option>
+                    <option value="6">6. Semester</option>
+                    <option value="7">7. Semester</option>
+                </select>
+            </div>
+            <!-- Table with rounded edges -->
+            <table class="table table-bordered custom-table-rounded">
+              <thead>
+                <tr>
+                  <th scope="col">Pflichtmodul</th>
+                  <th scope="col">LV</th>
+                  <th scope="col">Voraussetzung</th>
+                  <th scope="col">Semester</th>
+                  <th scope="col">ECTS</th>
+                </tr>
+              </thead>
+              <tbody>
+              <!-- Table Row 1 -->
+              <tr data-semesterABGPM="1">
+                <td>ABGPM1 (StEOP)</td>
+                <td>VO Professionalität und Schule</td>
+                <td>/</td>
+                <td>1</td>
+				<td>5</td>
+              </tr>
+              <tr class="empty-row">
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+				<td></td>
+              </tr>	
+              <tr data-semesterABGPM="2">
+                <td>ABGPM2</td>
+                <td>VO Historische und systematische Grundlagen von Bildungstheorie und Bildungsforschung</td>
+                <td>StEOP</td>
+                <td>2</td>
+				<td>2</td>
+              </tr>		
+              <tr data-semesterABGPM="2">
+                <td>ABGPM2</td>
+                <td>VO Individuums- und entwicklungspsychologische Grundlagen von Bildung und Lernen</td>
+                <td>StEOP</td>
+                <td>2</td>
+				<td>3</td>
+              </tr>
+              <tr class="empty-row">
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+				<td></td>
+              </tr>				  
+              <tr data-semesterABGPM="3">
+                <td>ABGPM3</td>
+                <td>VO Didaktik und Unterrichtsforschung</td>
+                <td>StEOP, empfohlen: ABGPM2</td>
+                <td>3</td>
+				<td>2</td>
+              </tr>	
+              <tr data-semesterABGPM="3">
+                <td>ABGPM3</td>
+                <td>PR Orientierungspraktikum</td>
+                <td>StEOP, empfohlen: ABGPM2</td>
+                <td>3</td>
+				<td>3</td>
+              </tr>	
+              <tr class="empty-row">
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+				<td></td>
+              </tr>	
+              <tr data-semesterABGPM="4">
+                <td>ABGPM4</td>
+                <td>Vertiefung 1 (PS / VU zu ausgewähltem Themenfeld)</td>
+                <td>StEOP, ABGPM3, empfohlen: ABGPM2</td>
+                <td>4</td>
+				<td>5</td>
+              </tr>	
+              <tr class="empty-row">
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+				<td></td>
+              </tr>	
+              <tr data-semesterABGPM="5">
+                <td>ABGPM5</td>
+                <td>VO Inklusive Schule und Vielfalt</td>
+                <td>StEOP, empfohlen: ABGPM2</td>
+                <td>5</td>
+				<td>5</td>
+              </tr>	
+              <tr class="empty-row">
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+				<td></td>
+              </tr>	
+              <tr data-semesterABGPM="5">
+                <td>ABGPM6</td>
+                <td>VO Schulforschung und Unterrichtspraxis</td>
+                <td>StEOP, ABGPM2, ABGPM3, empfohlen: ABGPM4</td>
+                <td>5</td>
+				<td>2</td>
+              </tr>	
+              <tr data-semesterABGPM="6">
+                <td>ABGPM6</td>
+                <td>PS Schul- und Unterrichtsforschung</td>
+                <td>StEOP, ABGPM2, ABGPM3, empfohlen: ABGPM4</td>
+                <td>6</td>
+				<td>2</td>
+              </tr>	
+              <tr data-semesterABGPM="6">
+                <td>ABGPM6</td>
+                <td>Schulpraxis "Überfachliche Kompetenzen und Querschnittskompetenzen"</td>
+                <td>StEOP, ABGPM2, ABGPM3, empfohlen: ABGPM4</td>
+                <td>6</td>
+				<td>2</td>
+              </tr>	
+              <tr class="empty-row">
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+				<td></td>
+              </tr>	
+              <tr data-semesterABGPM="7">
+                <td>ABGPM7</td>
+                <td>PS zu einem ausgewählten Themenfeld</td>
+                <td>StEOP, ABGPM4, empfohlen: ABGPM2, ABGPM3, ABGPM5</td>
+                <td>7</td>
+				<td>5</td>
+              </tr>	
+              <tr class="empty-row">
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+				<td></td>
+              </tr>	
+              <tr class="empty-row">
+                <td><b>Gesamt</b></td>
+                <td></td>
+                <td></td>
+                <td></td>
+				<td><b>40</b></td>
+              </tr>
+              </tbody>
+            </table>
+			<br>
+			 <a type="button" class="btn btn-info" href="https://senat.univie.ac.at/fileadmin/user_upload/s_senat/konsolidiert_Lehramt/Allgemeines_Curriculum_BA_Lehramt.pdf" target="_blank">Teilcurriucula als PDF</a>
+          </div>
+          <!-- Additional exam card items here -->
+        </p>
+      </div>
+    </div>
+</div>
+
+
+<!-- JavaScript to filter table rows based on the selected value -->
+<script>
+    $(document).ready(function () {
+        // Function to toggle visibility of rows based on the selected semester
+        function toggleRows(selectedValue) {
+            if (selectedValue === 'all') {
+                // Show all rows if "All" is selected, including empty rows
+                $('[data-semesterABGPM]').show();
+                $('.empty-row').show(); // Show empty rows when "all" is selected
+            } else {
+                // Hide all rows and show only the selected ones, including empty rows for that semester
+                $('[data-semesterABGPM]').hide();
+                $('[data-semesterABGPM="' + selectedValue + '"]').show();
+
+                // Hide all empty rows
+                $('.empty-row').hide();
+            }
+        }
+
+        // Event listener for the dropdown change
+        $('#filterSelect').change(function () {
+            var selectedValue = $(this).val();
+            // Toggle visibility of rows based on the selected semester
+            toggleRows(selectedValue);
+        });
+
+        // On page load, toggle rows based on the initial selected value
+        toggleRows($('#filterSelect').val());
+    });
+</script>
+
+<br>
+
+<div class="card">
+    <div class="card-body">
+      <h3 class="card-title" data-toggle="collapse" href="#collapseBodyENG">UF Englisch (LA Sek. Bachelor)</h3>
+      <div class="collapse" id="collapseBodyENG">
+        <p>
+          <div class="card-body">
+            <!-- Dropdown menu for filtering -->
+            <div class="form-group">
+                <label for="filterSelectENG">Filter by Semester:</label>
+                <select class="form-control" id="filterSelectENG">
+                    <option value="all" selected>All</option>
+                    <option value="1">1. Semester</option>
+                    <option value="2">2. Semester</option>
+                    <option value="3">3. Semester</option>
+                    <option value="4">4. Semester</option>
+                    <option value="5">5. Semester</option>
+                    <option value="6">6. Semester</option>
+                    <option value="7">7. Semester</option>
+                    <option value="8">8. Semester</option>
+
+                </select>
+            </div>
+            <!-- Table with rounded edges -->
+            <table class="table table-bordered custom-table-rounded">
+              <thead>
+                <tr>
+                  <th scope="col">Pflichtmodul</th>
+                  <th scope="col">LV</th>
+                  <th scope="col">Voraussetzung</th>
+                  <th scope="col">Semester</th>
+                  <th scope="col">ECTS</th>
+                </tr>
+              </thead>
+              <tbody>
+              <tr data-semesterENG="1">
+                <td>UF EN 01 (StEOP)</td>
+                <td>VO Introduction to English Linguistics</td>
+                <td>/</td>
+                <td>1</td>
+				<td>3</td>
+              </tr>
+              <tr data-semesterENG="1">
+                <td>UF EN 01 (StEOP)</td>
+                <td>VO Introduction to the Study of Literature and Culture</td>
+                <td>/</td>
+                <td>1</td>
+				<td>3</td>
+              </tr>
+              <tr class="empty-row">
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+				<td></td>
+              </tr>	
+              <tr data-semesterENG="1">
+                <td>UF EN 02</td>
+                <td>VO Grammar in Use</td>
+                <td>StEOP</td>
+                <td>1</td>
+				<td>3</td>
+              </tr>		
+              <tr data-semesterENG="2">
+                <td>UF EN 02</td>
+                <td>VO Introduction to Information and Research Literacy</td>
+                <td>StEOP</td>
+                <td>2</td>
+				<td>2</td>
+              </tr>	
+              <tr class="empty-row">
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+				<td></td>
+              </tr>				  
+              <tr data-semesterENG="2">
+                <td>UF EN 03</td>
+                <td>UE Integrated Language and Study Skills 1</td>
+                <td>StEOP, VELT</td>
+                <td>2</td>
+				<td>5</td>
+              </tr>	
+              <tr data-semesterENG="3">
+                <td>UF EN 03</td>
+                <td>UE Integrated Language and Study Skills 1</td>
+                <td>StEOP, VELT</td>
+                <td>3</td>
+				<td>5</td>
+              </tr>		
+              <tr class="empty-row">
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+				<td></td>
+              </tr>	
+              <tr data-semesterENG="2">
+                <td>UF EN 04</td>
+                <td>VO Cultural Theories and Popular Culture</td>
+                <td>StEOP, empfohlen: UF EN 02</td>
+                <td>2</td>
+				<td>3</td>
+              </tr>	
+              <tr data-semesterENG="3">
+                <td>UF EN 04</td>
+                <td>VO History of Literatures in English</td>
+                <td>StEOP, empfohlen: UF EN 02</td>
+                <td>3</td>
+				<td>3</td>
+              </tr>
+              <tr data-semesterENG="3">
+                <td>UF EN 04</td>
+                <td>VO Language in a Social Context</td>
+                <td>StEOP, empfohlen: UF EN 02</td>
+                <td>3</td>
+				<td>3</td>
+              </tr>
+              <tr class="empty-row">
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+				<td></td>
+              </tr>	
+              <tr data-semesterENG="4">
+                <td>UF EN 05</td>
+                <td>FK English Language Teaching (ELT) Foundations 1</td>
+                <td>StEOP, UF EN02, UF EN 03</td>
+                <td>4</td>
+				<td>4</td>
+              </tr>	
+              <tr data-semesterENG="5">
+                <td>UF EN 05</td>
+                <td>FK English Language Teaching (ELT) Foundations 2</td>
+                <td>StEOP, UF EN02, UF EN 03</td>
+                <td>5</td>
+				<td>4</td>
+              </tr>	
+              <tr class="empty-row">
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+				<td></td>
+              </tr>	
+              <tr data-semesterENG="4">
+                <td>UF EN 06</td>
+                <td>UE + Ikb Practical Phonetics & Oral Communication Skills 1</td>
+                <td>StEOP, UF EN02, UF EN 03</td>
+                <td>4</td>
+				<td>5</td>
+              </tr>	
+              <tr data-semesterENG="4">
+                <td>UF EN 06</td>
+                <td>UE Language in Use 1</td>
+                <td>StEOP, UF EN02, UF EN 03</td>
+                <td>4</td>
+				<td>5</td>
+              </tr>
+              <tr data-semesterENG="5">
+                <td>UF EN 06</td>
+                <td>UE English in a Professional Context</td>
+                <td>StEOP, UF EN02, UF EN 03</td>
+                <td>5</td>
+				<td>5</td>
+              </tr>	
+              <tr class="empty-row">
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+				<td></td>
+              </tr>	
+              <tr data-semesterENG="7">
+                <td>UF EN 07</td>
+                <td>FK Language Assessment and Feedback</td>
+                <td>StEOP, UF EN05, UF EN 11</td>
+                <td>7</td>
+				<td>3</td>
+              </tr>	
+              <tr data-semesterENG="7">
+                <td>UF EN 07</td>
+                <td>VK Principles of English Language Teaching</td>
+                <td>StEOP, UF EN05, UF EN 11</td>
+                <td>7</td>
+				<td>4</td>
+              </tr>
+              <tr class="empty-row">
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+				<td></td>
+              </tr>	
+              <tr data-semesterENG="7">
+                <td>UF EN 08</td>
+                <td>KO Critical Media Analysis</td>
+                <td>StEOP, UF EN02, UF EN 03, UF EN 04</td>
+                <td>7</td>
+				<td>6</td>
+              </tr>
+              <tr data-semesterENG="8">
+                <td>UF EN 08</td>
+                <td>VK Literature & Language Education <b>oder</b> Cultural Studies & Language Education</td>
+                <td>StEOP, UF EN02, UF EN 03, UF EN 04</td>
+                <td>8</td>
+				<td>5</td>
+              </tr>
+              <tr class="empty-row">
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+				<td></td>
+              </tr>	
+              <tr data-semesterENG="5">
+                <td>UF EN 08 / 09</td>
+                <td>PS Linguistics <b>oder</b> PS Literary Studies</td>
+                <td>StEOP, UF EN02, UF EN 03, UF EN 04</td>
+                <td>5 / 6</td>
+				<td>5</td>
+              </tr>
+              <tr class="empty-row">
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+				<td></td>
+              </tr>
+              <tr data-semesterENG="8">
+                <td>UF EN 09</td>
+                <td>VK Linguistics and Language Education</td>
+                <td>StEOP, UF EN02, UF EN 03, UF EN 04</td>
+                <td>8</td>
+				<td>5</td>
+              </tr>
+              <tr data-semesterENG="8">
+                <td>UF EN 09</td>
+                <td>Bachelorarbeit</td>
+                <td>StEOP, UF EN02, UF EN 03, UF EN 04</td>
+                <td>8</td>
+				<td>4</td>
+              </tr>
+              <tr class="empty-row">
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+				<td></td>
+              </tr>
+              <tr data-semesterENG="7">
+                <td>UF EN 10 (Wahlbereich)</td>
+                <td>Lehrveranstaltungen aus dem Wahlbereich</td>
+                <td>StEOP, empfohlen bei Fachdidaktik: UF EN 05 & EN 11</td>
+                <td>7</td>
+				<td>0 - 10</td>
+              </tr>
+              <tr class="empty-row">
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+				<td></td>
+              </tr>
+              <tr data-semesterENG="6">
+                <td>UF EN 11 (Schulpraxis)</td>
+                <td>Fachbezogenes Schulpraktikum</td>
+                <td>StEOP, UF EN 05, ABGPM3</td>
+                <td>6</td>
+				<td>3</td>
+              </tr>
+              <tr data-semesterENG="6">
+                <td>UF EN 11 (Schulpraxis)</td>
+                <td>KU Practicum Coaching, Materials Evaluation and Development</td>
+                <td>StEOP, UF EN 05, ABGPM3</td>
+                <td>6</td>
+				<td>4</td>
+              </tr>
+              <tr class="empty-row">
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+				<td></td>
+              </tr>
+              <tr class="empty-row">
+                <td><b>Gesamt</b></td>
+                <td></td>
+                <td></td>
+                <td></td>
+				<td><b>97 - 107</b></td>
+              </tr>
+              </tbody>
+            </table>
+			<br>
+			 <a type="button" class="btn btn-info" href="https://senat.univie.ac.at/fileadmin/user_upload/s_senat/konsolidiert_Lehramt/Teilcurriculum_Englisch_BA_Lehramt.pdf" target="_blank">Teilcurriucula als PDF</a>
+          </div>
+          <!-- Additional exam card items here -->
+        </p>
+      </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        // Function to toggle visibility of rows based on the selected semester
+        function toggleRows(selectedValue) {
+            if (selectedValue === 'all') {
+                // Show all rows if "All" is selected, including empty rows
+                $('[data-semesterENG]').show();
+                $('.empty-row').show(); // Show empty rows when "all" is selected
+            } else {
+                // Hide all rows and show only the selected ones, including empty rows for that semester
+                $('[data-semesterENG]').hide();
+                $('[data-semesterENG="' + selectedValue + '"]').show();
+
+                // Hide all empty rows
+                $('.empty-row').hide();
+            }
+        }
+
+        // Event listener for the dropdown change
+        $('#filterSelectENG').change(function () {
+            var selectedValue = $(this).val();
+            // Toggle visibility of rows based on the selected semester
+            toggleRows(selectedValue);
+        });
+
+        // On page load, toggle rows based on the initial selected value
+        toggleRows($('#filterSelectENG').val());
+    });
+</script>
+
+<br>
+
+<div class="card">
+    <div class="card-body">
+      <h3 class="card-title" data-toggle="collapse" href="#collapseBodyBIO">UF Biologie & Umweltkunde (LA Sek. Bachelor)</h3>
+      <div class="collapse" id="collapseBodyBIO">
+        <p>
+          <div class="card-body">
+            <!-- Dropdown menu for filtering -->
+            <div class="form-group">
+                <label for="filterSelectBIO">Filter by Semester:</label>
+                <select class="form-control" id="filterSelectBIO">
+                    <option value="all" selected>All</option>
+                    <option value="1">1. Semester</option>
+                    <option value="2">2. Semester</option>
+                    <option value="3">3. Semester</option>
+                    <option value="4">4. Semester</option>
+                    <option value="5">5. Semester</option>
+                    <option value="6">6. Semester</option>
+                    <option value="7">7. Semester</option>
+                    <option value="8">8. Semester</option>
+
+                </select>
+            </div>
+            <!-- Table with rounded edges -->
+            <table class="table table-bordered custom-table-rounded">
+              <thead>
+                <tr>
+                  <th scope="col">Pflichtmodul</th>
+                  <th scope="col">LV</th>
+                  <th scope="col">Voraussetzung</th>
+                  <th scope="col">Semester</th>
+                  <th scope="col">ECTS</th>
+                </tr>
+              </thead>
+              <tbody>
+              <tr data-semesterBIO="1">
+                <td>UF BU 01 (StEOP)</td>
+                <td>VO Einführung in die Biologie I (Zoologie, Botanik, Fachdidaktik)</td>
+                <td>/</td>
+                <td>1</td>
+				<td>6</td>
+              </tr>
+              <tr class="empty-row">
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+				<td></td>
+              </tr>	
+              <tr data-semesterBIO="1">
+                <td>UF BU 02</td>
+                <td>VO Einführung in die Biologie II (Biochemie, Genetik, Zellbiologie, Mikrobiologie)</td>
+                <td>StEOP</td>
+                <td>1</td>
+				<td>8</td>
+              </tr>		
+              <tr class="empty-row">
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+				<td></td>
+              </tr>				  
+              <tr data-semesterBIO="2">
+                <td>UF BU 03</td>
+                <td>VO Evolution und Entwicklung</td>
+                <td>StEOP</td>
+                <td>2</td>
+				<td>3</td>
+              </tr>	
+              <tr data-semesterBIO="2">
+                <td>UF BU 03</td>
+                <td>VO Geschlechter- und Sexualbiologie</td>
+                <td>StEOP</td>
+                <td>2</td>
+				<td>3</td>
+              </tr>
+              <tr data-semesterBIO="2">
+                <td>UF BU 03</td>
+                <td>VO Grundlagen der Verhaltensbiologie & Kognitionsbiologie</td>
+                <td>StEOP</td>
+                <td>2</td>
+				<td>2</td>
+              </tr>	
+              <tr class="empty-row">
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+				<td></td>
+              </tr>	
+              <tr data-semesterBIO="2">
+                <td>UF BU 04</td>
+                <td>VO Erdwissenschaftliche Grundlagen für Biologie</td>
+                <td>StEOP</td>
+                <td>2</td>
+				<td>3</td>
+              </tr>	
+              <tr data-semesterBIO="2">
+                <td>UF BU 04</td>
+                <td>VU Grundlagen der Paläobiologie</td>
+                <td>StEOP</td>
+                <td>2</td>
+				<td>3</td>
+              </tr>
+              <tr data-semesterBIO="2">
+                <td>UF BU 04</td>
+                <td>VO Naturschutz und Nachhaltigkeit</td>
+                <td>StEOP</td>
+                <td>2</td>
+				<td>2</td>
+              </tr>
+              <tr class="empty-row">
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+				<td></td>
+              </tr>	
+              <tr data-semesterBIO="3">
+                <td>UF BU 05</td>
+                <td>VU Morphologie und Vielfalt der Tiere</td>
+                <td>StEOP, UF BU 02</td>
+                <td>3</td>
+				<td>5</td>
+              </tr>	
+              <tr data-semesterBIO="4">
+                <td>UF BU 05</td>
+                <td>VU Biologie und Kenntnis heimischer Tiere</td>
+                <td>StEOP, UF BU 02</td>
+                <td>4</td>
+				<td>5</td>
+              </tr>	
+              <tr class="empty-row">
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+				<td></td>
+              </tr>	
+              <tr data-semesterBIO="4">
+                <td>UF BU 06</td>
+                <td>VU Diversität & Organisation der Pflanzen, Algen & Pilze</td>
+                <td>StEOP, UF BU 02</td>
+                <td>4</td>
+				<td>3</td>
+              </tr>	
+              <tr data-semesterBIO="4">
+                <td>UF BU 06</td>
+                <td>VU + EX Kenntnis heimischer Pflanzen</td>
+                <td>StEOP, UF BU 02</td>
+                <td>4</td>
+				<td>4</td>
+              </tr>
+              <tr data-semesterBIO="3">
+                <td>UF BU 06</td>
+                <td>VU Anatomie und Physiologie der Pflanzen</td>
+                <td>StEOP, UF BU 02</td>
+                <td>3</td>
+				<td>3</td>
+              </tr>	
+              <tr class="empty-row">
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+				<td></td>
+              </tr>	
+              <tr data-semesterBIO="5">
+                <td>UF BU 07</td>
+                <td>VO Grundlagen der Ökologie</td>
+                <td>StEOP, UF BU 02</td>
+                <td>5</td>
+				<td>2</td>
+              </tr>	
+              <tr data-semesterBIO="5">
+                <td>UF BU 07</td>
+                <td>VO Großlebensräume der Erde</td>
+                <td>StEOP, UF BU 02</td>
+                <td>5</td>
+				<td>3</td>
+              </tr>
+              <tr data-semesterBIO="6">
+                <td>UF BU 07</td>
+                <td>UE Interdisziplinäre ökologische Übungen</td>
+                <td>StEOP, UF BU 02</td>
+                <td>6</td>
+				<td>5</td>
+              </tr>
+              <tr class="empty-row">
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+				<td></td>
+              </tr>	
+              <tr data-semesterBIO="5">
+                <td>UF BU 08</td>
+                <td>VO Evolutionsbiologie des Menschen</td>
+                <td>StEOP, empfohlen: UF BU 02</td>
+                <td>5</td>
+				<td>3</td>
+              </tr>
+              <tr data-semesterBIO="5">
+                <td>UF BU 08</td>
+                <td>VO Anatomie und Gesundheitslehre des Menschen</td>
+                <td>StEOP, empfohlen: UF BU 02</td>
+                <td>5</td>
+				<td>4</td>
+              </tr>
+              <tr data-semesterBIO="6">
+                <td>UF BU 08</td>
+                <td>VO Physiologie</td>
+                <td>StEOP, empfohlen: UF BU 02</td>
+                <td>6</td>
+				<td>4</td>
+              </tr>
+              <tr class="empty-row">
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+				<td></td>
+              </tr>	
+              <tr data-semesterBIO="7">
+                <td>UF BU 09</td>
+                <td>UE + EX Freilanddidaktik & Lernen an außerschulischen Lernorten</td>
+                <td>StEOP, empfohlen: UF BU 02, 03, 04, 05, 06, 07</td>
+                <td>7</td>
+				<td>4</td>
+              </tr>
+              <tr data-semesterBIO="7">
+                <td>UF BU 09</td>
+                <td>PP Interdisziplinäres Projektpraktikum</td>
+                <td>StEOP, empfohlen: UF BU 02, 03, 04, 05, 06, 07</td>
+                <td>7</td>
+				<td>4</td>
+              </tr>
+              <tr data-semesterBIO="5">
+                <td>UF BU 09</td>
+                <td>UE Spezifische Themen und fachspezifische Arbeitsweisen im Biologieunterricht</td>
+                <td>StEOP, empfohlen: UF BU 02, 03, 04, 05, 06, 07</td>
+                <td>5</td>
+				<td>4</td>
+              </tr>
+              <tr class="empty-row">
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+				<td></td>
+              </tr>
+              <tr data-semesterBIO="7">
+                <td>UF BU 10 (Wahlbereich)</td>
+                <td>Veranstaltungen aus dem Wahlbereich</td>
+                <td>StEOP</td>
+                <td>7</td>
+				<td>0 - 10</td>
+              </tr>
+              <tr class="empty-row">
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+				<td></td>
+              </tr>
+              <tr data-semesterBIO="6">
+                <td>UF BU 11</td>
+                <td>Schulpraxis</td>
+                <td>StEOP, ABGPM3</td>
+                <td>6</td>
+				<td>3</td>
+              </tr>
+              <tr data-semesterBIO="6">
+                <td>UF BU 11</td>
+                <td>UE Unterrichtsplanung und Evaluation im Fach Biologie und Umweltkunde</td>
+                <td>StEOP, ABGPM3</td>
+                <td>6</td>
+				<td>4</td>
+              </tr>
+              <tr class="empty-row">
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+				<td></td>
+              </tr>
+              <tr data-semesterBIO="8">
+                <td>UF BU 12</td>
+                <td>SE Bachelorseminar</td>
+                <td>StEOP, UF BU 02, 03, 04, 05, 06, 07, 08, empfohlen: UF BU 09</td>
+                <td>8</td>
+				<td>7</td>
+              </tr>
+              <tr class="empty-row">
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+				<td></td>
+              </tr>
+              <tr class="empty-row">
+                <td><b>Gesamt</b></td>
+                <td></td>
+                <td></td>
+                <td></td>
+				<td><b>97 - 107</b></td>
+              </tr>
+              </tbody>
+            </table>
+			<br>
+			 <a type="button" class="btn btn-info" href="https://senat.univie.ac.at/fileadmin/user_upload/s_senat/konsolidiert_Lehramt/Teilcurriculum_Biologie_und_Umweltkunde_BA_Lehramt.pdf" target="_blank">Teilcurriucula als PDF</a>
+          </div>
+          <!-- Additional exam card items here -->
+        </p>
+      </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        // Function to toggle visibility of rows based on the selected semester
+        function toggleRows(selectedValue) {
+            if (selectedValue === 'all') {
+                // Show all rows if "All" is selected, including empty rows
+                $('[data-semesterBIO]').show();
+                $('.empty-row').show(); // Show empty rows when "all" is selected
+            } else {
+                // Hide all rows and show only the selected ones, including empty rows for that semester
+                $('[data-semesterBIO]').hide();
+                $('[data-semesterBIO="' + selectedValue + '"]').show();
+
+                // Hide all empty rows
+                $('.empty-row').hide();
+            }
+        }
+
+        // Event listener for the dropdown change
+        $('#filterSelectBIO').change(function () {
+            var selectedValue = $(this).val();
+            // Toggle visibility of rows based on the selected semester
+            toggleRows(selectedValue);
+        });
+
+        // On page load, toggle rows based on the initial selected value
+        toggleRows($('#filterSelectBIO').val());
+    });
+</script>
+
+<br>
+
+<div class="card">
+    <div class="card-body">
+      <h3 class="card-title" data-toggle="collapse" href="#collapseBodyGEO">UF Geographie & Wirtschaftkunde (LA Sek. Bachelor)</h3>
+      <div class="collapse" id="collapseBodyGEO">
+        <p>
+          <div class="card-body">
+            <!-- Dropdown menu for filtering -->
+            <div class="form-group">
+                <label for="filterSelectGEO">Filter by Semester:</label>
+                <select class="form-control" id="filterSelectGEO">
+                    <option value="all" selected>All</option>
+                    <option value="1">1. Semester</option>
+                    <option value="2">2. Semester</option>
+                    <option value="3">3. Semester</option>
+                    <option value="4">4. Semester</option>
+                    <option value="5">5. Semester</option>
+                    <option value="6">6. Semester</option>
+                    <option value="7">7. Semester</option>
+                    <option value="8">8. Semester</option>
+
+                </select>
+            </div>
+            <!-- Table with rounded edges -->
+            <table class="table table-bordered custom-table-rounded">
+              <thead>
+                <tr>
+                  <th scope="col">Pflichtmodul</th>
+                  <th scope="col">LV</th>
+                  <th scope="col">Voraussetzung</th>
+                  <th scope="col">Semester</th>
+                  <th scope="col">ECTS</th>
+                </tr>
+              </thead>
+              <tbody>
+              <tr data-semesterGEO="1">
+                <td>UF GW 01 (StEOP)</td>
+                <td>VO Einführung in die Humangeographie I</td>
+                <td>/</td>
+                <td>1</td>
+				<td>3</td>
+              </tr>
+              <tr data-semesterGEO="1">
+                <td>UF GW 01 (StEOP)</td>
+                <td>VO Grundbegriffe der Ökonomie</td>
+                <td>/</td>
+                <td>1</td>
+				<td>2</td>
+              </tr>
+              <tr class="empty-row">
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+				<td></td>
+              </tr>	
+              <tr data-semesterGEO="2">
+                <td>UF GW 02</td>
+                <td>PS Einführung in die Praxis des kompetenzorientierten GW-Unterrichts</td>
+                <td>StEOP</td>
+                <td>2</td>
+				<td>3</td>
+              </tr>		
+              <tr class="empty-row">
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+				<td></td>
+              </tr>				  
+              <tr data-semesterGEO="3">
+                <td>UF GW 03</td>
+                <td>VO, KU Fachdidaktik I: Didaktische Konzepte und Inhalte des Unterrichtsfachs GW</td>
+                <td>StEOP, UF GW 02</td>
+                <td>3</td>
+				<td>3</td>
+              </tr>	
+              <tr data-semesterGEO="4">
+                <td>UF GW 03</td>
+                <td>PS Fachdidaktik II: Gestaltung von Lehr- und Lernprozessen: Sozialformen und Medien im GW-Unterricht</td>
+                <td>StEOP, UF GW 02</td>
+                <td>4</td>
+				<td>3</td>
+              </tr>
+              <tr class="empty-row">
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+				<td></td>
+              </tr>	
+              <tr data-semesterGEO="7">
+                <td>UF GW 04</td>
+                <td>PS Fachdidaktisches Proseminar, Vertiefung zu einem Spezialthema aus der Fachdidaktik</td>
+                <td>StEOP, UF GW 02, UF GW 03</td>
+                <td>7</td>
+				<td>3</td>
+              </tr>
+              <tr data-semesterGEO="8">
+                <td>UF GW 04</td>
+                <td>PR, UE Fachdidaktische Übung oder Praktikum</td>
+                <td>StEOP, UF GW 02, UF GW 03</td>
+                <td>8</td>
+				<td>2</td>
+              </tr>				  
+              <tr class="empty-row">
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+				<td></td>
+              </tr>	
+              <tr data-semesterGEO="3">
+                <td>UF GW 05</td>
+                <td>VO Einführung in die Volkswirtschaftstheorie</td>
+                <td>StEOP</td>
+                <td>3</td>
+				<td>3</td>
+              </tr>
+              <tr data-semesterGEO="2">
+                <td>UF GW 05</td>
+                <td>VO Einführung in Allgemeine Betriebswirtschaftslehre</td>
+                <td>StEOP</td>
+                <td>2</td>
+				<td>3</td>
+              </tr>				  
+              <tr class="empty-row">
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+				<td></td>
+              </tr>	
+              <tr data-semesterGEO="5">
+                <td>UF GW 06</td>
+                <td>VO Grundzüge des österreichischen und internationalen Geld- und Finanzwesens</td>
+                <td>StEOP</td>
+                <td>5</td>
+				<td>3</td>
+              </tr>
+              <tr data-semesterGEO="4">
+                <td>UF GW 06</td>
+                <td>VO Grundzüge der Wirtschaftspolitik, erläutert am Beispiel Österreichs</td>
+                <td>StEOP</td>
+                <td>4</td>
+				<td>2</td>
+              </tr>
+              <tr class="empty-row">
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+				<td></td>
+              </tr>	
+              <tr data-semesterGEO="7">
+                <td>UF GW 07</td>
+                <td>SE Seminar aus Wirtschaftkunde (Volkswirtschafts- oder Betriebswirtschaftslehre)</td>
+                <td>StEOP, UF GW 05, UF GW 06, UF GW 10</td>
+                <td>7</td>
+				<td>4</td>
+              </tr>
+              <tr class="empty-row">
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+				<td></td>
+              </tr>	
+              <tr data-semesterGEO="8">
+                <td>UF GW 08</td>
+                <td>PS Fachdidaktisches Proseminar: Fachdidaktik der Wirtschaftkunde im GW-Unterricht</td>
+                <td>StEOP, UF GW 03, UF GW 05, UF GW 06</td>
+                <td>8</td>
+				<td>3</td>
+              </tr>
+              <tr class="empty-row">
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+				<td></td>
+              </tr>	
+              <tr data-semesterGEO="1">
+                <td>UF GW 09</td>
+                <td>VO Grundkonzepte und Paradigmen der Geographie <b>oder</b> Einführung in die Humangeographie II: Ausgewählte Problemstellungen & Forschungsansätze</td>
+                <td>StEOP</td>
+                <td>1</td>
+				<td>3</td>
+              </tr>
+              <tr class="empty-row">
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+				<td></td>
+              </tr>
+              <tr data-semesterGEO="2">
+                <td>UF GW 10</td>
+                <td>VO, KU Methoden wissenschaftlichen Arbeitens <b>oder</b> VO, KU Einführung in die empirische Sozialforschung für GeographInnen</td>
+                <td>StEOP</td>
+                <td>2</td>
+				<td>3</td>
+              </tr>
+             <tr data-semesterGEO="2">
+                <td>UF GW 10</td>
+                <td>PS, UE Methoden wissenschaftlichen Arbeitens <b>oder</b> PS, UE Einführung in die statistische Datenanalyse für Lehramtstudierende</td>
+                <td>StEOP</td>
+                <td>2</td>
+				<td>3</td>
+              </tr>
+              <tr class="empty-row">
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+				<td></td>
+              </tr>
+             <tr data-semesterGEO="3">
+                <td>UF GW 11</td>
+                <td>VO Einführung in die Katographie und Geoinformation I</td>
+                <td>StEOP</td>
+                <td>3</td>
+				<td>2</td>
+              </tr>
+             <tr data-semesterGEO="4">
+                <td>UF GW 11</td>
+                <td>PS, UE Geomedien und Geokommunikation im GW-Unterricht</td>
+                <td>StEOP</td>
+                <td>4</td>
+				<td>3</td>
+              </tr>
+              <tr class="empty-row">
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+				<td></td>
+              </tr>
+             <tr data-semesterGEO="1">
+                <td>UF GW 12</td>
+                <td>VO Einführung in die Physiogeographie</td>
+                <td>StEOP</td>
+                <td>1</td>
+				<td>3</td>
+              </tr>
+             <tr data-semesterGEO="2">
+                <td>UF GW 12</td>
+                <td>VO Grundzüge der Geomorphologie und Geoökologie <b>oder</b> VO Grundzüge der Geomorphologie <b>oder</b> VO Grundzüge der Biogeographie und Landschaftsökologie</td>
+                <td>StEOP</td>
+                <td>2</td>
+				<td>3</td>
+              </tr>
+              <tr class="empty-row">
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+				<td></td>
+              </tr>
+             <tr data-semesterGEO="5">
+                <td>UF GW 13</td>
+                <td>VO, KU Ausgewählte Themen zur Ressourcennutzung und zu den Mensch-Umwelt-Beziehungen</td>
+                <td>StEOP, UF GW 12</td>
+                <td>5</td>
+				<td>2</td>
+              </tr>
+             <tr data-semesterGEO="6">
+                <td>UF GW 13</td>
+                <td>PR, UE Physiogeographie (Gelände)Praktikum</td>
+                <td>StEOP, UF GW 12</td>
+                <td>6</td>
+				<td>2</td>
+              </tr>
+              <tr class="empty-row">
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+				<td></td>
+              </tr>
+             <tr data-semesterGEO="4">
+                <td>UF GW 14</td>
+                <td>VO, KU Grundzüge der Bevölkerungsgeographie</td>
+                <td>StEOP</td>
+                <td>4</td>
+				<td>3</td>
+              </tr>			  
+             <tr data-semesterGEO="3">
+                <td>UF GW 14</td>
+                <td>VO Einführung in die Stadtgeographie und Raumordnung <b>oder</b> VO Periphere und zentrumsferne ländliche Räume</td>
+                <td>StEOP</td>
+                <td>3</td>
+				<td>3</td>
+              </tr>	
+             <tr data-semesterGEO="4">
+                <td>UF GW 14</td>
+                <td>UE Übungen zur Stadtgeographie <b>oder</b> UE Übungen zur Geographie ländlicher Räume <b>oder</b> UE, PR Humangeographies (Gelände)Praktikum</td>
+                <td>StEOP</td>
+                <td>4</td>
+				<td>2</td>
+              </tr>				  
+              <tr class="empty-row">
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+				<td></td>
+              </tr>			  
+             <tr data-semesterGEO="6">
+                <td>UF GW 15</td>
+                <td>VO, KU Einführung in die allgemeine Wirtschaftsgeographie - die Räumlichkeit der Wirtschaft</td>
+                <td>StEOP</td>
+                <td>6</td>
+				<td>3</td>
+              </tr>				  
+             <tr data-semesterGEO="5">
+                <td>UF GW 15</td>
+                <td>VO Politische Geographie - die Räumlichkeit politischer Prozesse</td>
+                <td>StEOP</td>
+                <td>5</td>
+				<td>3</td>
+              </tr>				  
+              <tr class="empty-row">
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+				<td></td>
+              </tr>	
+             <tr data-semesterGEO="7">
+                <td>UF GW 16</td>
+                <td>SE Seminar aus Humangeographie (einschließlich Wirtschaftsgeographie)</td>
+                <td>StEOP, UF GW 09, UF GW 10, UF GW 14, UF GW 15</td>
+                <td>7</td>
+				<td>4</td>
+              </tr>
+              <tr class="empty-row">
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+				<td></td>
+              </tr>	
+             <tr data-semesterGEO="3">
+                <td>UF GW 17</td>
+                <td>VO Grundlagen und Konzepte der Raumforschung und Raumordnung <b>oder</b> VO Grundlagen und Ansätze der Regionalentwicklung in Österreich und der Europäischen Union</td>
+                <td>StEOP</td>
+                <td>3</td>
+				<td>3</td>
+              </tr>
+              <tr class="empty-row">
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+				<td></td>
+              </tr>	
+             <tr data-semesterGEO="5">
+                <td>UF GW 18</td>
+                <td>EX Eine oder mehrere Fachexkursionen, davon eine mit mindestens 2 ECTS</td>
+                <td>StEOP, UF GW 10</td>
+                <td>5</td>
+				<td>1</td>
+              </tr>
+             <tr data-semesterGEO="6">
+                <td>UF GW 18</td>
+                <td>EX Eine oder mehrere Fachexkursionen, davon eine mit mindestens 2 ECTS</td>
+                <td>StEOP, UF GW 10</td>
+                <td>6</td>
+				<td>2</td>
+              </tr>
+              <tr class="empty-row">
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+				<td></td>
+              </tr>	
+             <tr data-semesterGEO="7">
+                <td>UF GW 19</td>
+                <td>Lehrveranstaltungen aus dem Wahlbereich</td>
+                <td>StEOP</td>
+                <td>7</td>
+				<td>0 - 10</td>
+              </tr>
+              <tr class="empty-row">
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+				<td></td>
+              </tr>	
+             <tr data-semesterGEO="6">
+                <td>UF GW 20</td>
+                <td>Schulpraxis</td>
+                <td>StEOP, UF GW 02, UF GW 03</td>
+                <td>6</td>
+				<td>3</td>
+              </tr>
+             <tr data-semesterGEO="5">
+                <td>UF GW 20</td>
+                <td>UE Übung zur Unterrichtsplanung in GW</td>
+                <td>StEOP, UF GW 02, UF GW 03</td>
+                <td>5</td>
+				<td>2</td>
+              </tr>
+             <tr data-semesterGEO="6">
+                <td>UF GW 20</td>
+                <td>SE Fachdidaktisches Begleitseminar zur Schulpraxis in GW</td>
+                <td>StEOP, UF GW 02, UF GW 03</td>
+                <td>6</td>
+				<td>2</td>
+              </tr>
+              <tr class="empty-row">
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+				<td></td>
+              </tr>	
+             <tr data-semesterGEO="8">
+                <td>UF GW 21a</td>
+                <td>SE Konservatorium (Seminar) zur Bachelorarbeit</td>
+                <td>StEOP, UF GW 16</td>
+                <td>8</td>
+				<td>5</td>
+              </tr>			  
+              <tr class="empty-row">
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+				<td></td>
+              </tr>	
+             <tr data-semesterGEO="8">
+                <td>UF GW 21b</td>
+                <td>SE Konservatorium (Seminar) zur Bachelorarbeit</td>
+                <td>StEOP, UF GW 07</td>
+                <td>8</td>
+				<td>5</td>
+              </tr>	
+              <tr class="empty-row">
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+				<td></td>
+              </tr>				  
+              <tr class="empty-row">
+                <td><b>Gesamt</b></td>
+                <td></td>
+                <td></td>
+                <td></td>
+				<td><b>97 - 107</b></td>
+              </tr>
+              </tbody>
+            </table>
+			<br>
+			 <a type="button" class="btn btn-info" href="https://senat.univie.ac.at/fileadmin/user_upload/s_senat/konsolidiert_Lehramt/Teilcurriculum_Geographie_und_Wirtschaftskunde_BA_Lehramt.pdf" target="_blank">Teilcurriucula als PDF</a>
+          </div>
+          <!-- Additional exam card items here -->
+        </p>
+      </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        // Function to toggle visibility of rows based on the selected semester
+        function toggleRows(selectedValue) {
+            if (selectedValue === 'all') {
+                // Show all rows if "All" is selected, including empty rows
+                $('[data-semesterGEO]').show();
+                $('.empty-row').show(); // Show empty rows when "all" is selected
+            } else {
+                // Hide all rows and show only the selected ones, including empty rows for that semester
+                $('[data-semesterGEO]').hide();
+                $('[data-semesterGEO="' + selectedValue + '"]').show();
+
+                // Hide all empty rows
+                $('.empty-row').hide();
+            }
+        }
+
+        // Event listener for the dropdown change
+        $('#filterSelectGEO').change(function () {
+            var selectedValue = $(this).val();
+            // Toggle visibility of rows based on the selected semester
+            toggleRows(selectedValue);
+        });
+
+        // On page load, toggle rows based on the initial selected value
+        toggleRows($('#filterSelectGEO').val());
+    });
+</script>
+
+
+    <style>
+        /* Style for the popup container */
+        #warningPopup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            text-align: center;
+        }
+
+        /* Style for the warning content */
+        #warningContent {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+	
+	
+<div id="warningPopup">
+    <div id="warningContent">
+		 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/Warning.svg/2219px-Warning.svg.png" width="90px" height="85px">
+		<p>
+        <p>Diese Seite zur besseren Ansicht bitte auf einem größeren Display öffnen!</p>
+    </div>
+</div>
+
+<script>
+    // JavaScript to show the warning popup on small screens
+    $(document).ready(function () {
+        // Check if the screen width is less than a certain value (adjust as needed)
+        if ($(window).width() <= 768) {
+            // Show the warning popup
+            $('#warningPopup').show();
+        }
+    });
+</script>
+
+<script>
+  // Your JavaScript for rendering the calendar here
+  const calendarDays = document.getElementById('calendar-days');
+  const monthYear = document.getElementById('month-year');
+  const weekdays = ['Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa', 'So'];
+
+  const prevButton = document.querySelector('.prev');
+  const nextButton = document.querySelector('.next');
+
+  let currentMonth = new Date().getMonth();
+  let currentYear = new Date().getFullYear();
+
+  renderCalendar(currentMonth, currentYear);
+
+  prevButton.addEventListener('click', () => {
+    currentMonth--;
+    if (currentMonth < 0) {
+      currentMonth = 11;
+      currentYear--;
+    }
+    renderCalendar(currentMonth, currentYear);
+  });
+
+  nextButton.addEventListener('click', () => {
+    currentMonth++;
+    if (currentMonth > 11) {
+      currentMonth = 0;
+      currentYear++;
+    }
+    renderCalendar(currentMonth, currentYear);
+  });
+
+  function renderCalendar(month, year) {
+    const daysElement = document.getElementById('calendar-days');
+    daysElement.innerHTML = '';
+
+    const firstDayOfMonth = new Date(year, month, 1);
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+    const startingDay = firstDayOfMonth.getDay() === 0 ? 6 : firstDayOfMonth.getDay() - 1; // Adjusting for Monday as the first day
+
+    monthYear.textContent = `${new Intl.DateTimeFormat('default', { month: 'long' }).format(firstDayOfMonth)} ${year}`;
+
+    let day = 1;
+    for (let i = 0; i < 6; i++) {
+      for (let j = 0; j < 7; j++) {
+        const dayDiv = document.createElement('div');
+        if (i === 0 && j < startingDay) {
+          dayDiv.textContent = '';
+        } else if (day <= daysInMonth) {
+          dayDiv.textContent = day;
+		  
+		  
+		      if (day === new Date().getDate() && month === new Date().getMonth() && year === new Date().getFullYear()) {
+        dayDiv.classList.add('today');
+      }
+
+          // Event on December 16th
+if (year === 2023 && month === 11 && day === 16) {
+  const eventSpan = document.createElement('span');
+  eventSpan.classList.add('event');
+  eventSpan.style.color = 'red';
+  eventSpan.style.fontWeight = 'bold';
+  eventSpan.textContent = '09:45 - Prüfung Professionalität & Schule';
+  
+  dayDiv.appendChild(eventSpan);
+}
+
+if (year === 2023 && month === 11 && day === 18) {
+  const eventSpan = document.createElement('span');
+  eventSpan.classList.add('event');
+  eventSpan.style.color = 'red';
+  eventSpan.style.fontWeight = 'bold';
+  eventSpan.textContent = '12:30 - Modulprüfung StEOP Linguistics & Literature and Culture';
+  
+  dayDiv.appendChild(eventSpan);
+}
+
+        // Add events on Wednesdays (10, 17, 24) in January
+if (year === 2024 && month === 0 && day === 31) {
+  const eventSpan = document.createElement('span');
+  eventSpan.classList.add('event');
+  eventSpan.style.color = 'red';
+  eventSpan.style.fontWeight = 'bold'; // Corrected property name
+  eventSpan.textContent = '11:30 - Prüfung Grammar in Use (GiU)';
+  
+  dayDiv.appendChild(eventSpan);
+}
+
+if (year === 2024 && month === 0 && day === 10) {
+  const eventSpan = document.createElement('span');
+  eventSpan.classList.add('event');
+  eventSpan.style.color = 'red';
+  eventSpan.style.fontWeight = 'bold'; // Corrected property name
+  eventSpan.textContent = '14:55 - Prüfung StEOP UF Biologie';
+  
+  dayDiv.appendChild(eventSpan);
+}
+
+if (year === 2024 && month === 1 && day === 21) {
+  const eventSpan = document.createElement('span');
+  eventSpan.classList.add('event');
+  eventSpan.style.color = 'red';
+  eventSpan.style.fontWeight = 'bold'; // Corrected property name
+  eventSpan.textContent = 'VELT Sprachtest';
+  
+  dayDiv.appendChild(eventSpan);
+}
+
+          day++;
+        }
+        daysElement.appendChild(dayDiv);
+      }
+    }
+  }
+</script>
+
+<br>
+<br>
+<br>
+
+  </div>
+
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
