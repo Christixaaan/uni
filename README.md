@@ -6,12 +6,17 @@ Die Informationen zu den jeweiligen Curricula entstammen den Teilcurricula der U
 <b>→ Es handelt sich hierbei um ein reines Privatprojekt und steht in keinem Zusammenhang mit der Universität Wien!</b>
 
 
+
 ## Verfügbare Curricula
 
   → Allgemeine Bildungswissenschaften
+  
   → Unterrichtsfach Englisch
+  
   → Unterrichtsfach Biologie und Umweltkunde
+  
   → Unterrichtsfach Geographie und Wirtschaftskunde
+
 
 
 ## Copyright
