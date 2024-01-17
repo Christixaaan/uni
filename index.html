@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdnjs.cloudflare.com; style-src 'self' https://maxcdn.bootstrapcdn.com; img-src 'self' data:; font-src 'self' https://maxcdn.bootstrapcdn.com;">
   <link rel="shortcut icon" href="https://i.imgur.com/neyk3pN.png">
   <title>Curricula | Uni Wien</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -285,46 +284,6 @@
 }
   </style>
   
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      const customTooltips = document.querySelectorAll('.custom-tooltip');
-
-      customTooltips.forEach(function (tooltip) {
-        tooltip.addEventListener('click', function () {
-          const title = tooltip.getAttribute('title');
-          showModal(title);
-        });
-      });
-    });
-
-    function showModal(content) {
-      const modal = document.getElementById('modal');
-      const modalContent = document.getElementById('modalContent');
-
-      modalContent.innerHTML = content;
-      modal.style.display = 'flex';
-    }
-
-    function closeModal() {
-      const modal = document.getElementById('modal');
-      modal.style.display = 'none';
-    }
-
-    // Close the modal on outside click
-    window.addEventListener('click', function (event) {
-      const modal = document.getElementById('modal');
-      if (event.target === modal) {
-        modal.style.display = 'none';
-      }
-    });
-  </script>
-
-  <div class="modal" id="modal">
-    <div class="modal-content">
-      <span class="close-modal" onclick="closeModal()">&times;</span>
-      <div id="modalContent"></div>
-    </div>
-  </div>
 
 <div class="container mt-4">
     <div class="card">
