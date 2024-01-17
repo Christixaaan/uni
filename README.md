@@ -11,9 +11,9 @@ Die Informationen zu den jeweiligen Curricula entstammen den Teilcurricula der U
 
   → Teilcurricula
   
-  → Link zur Lehrveranstaltung ins u:find
+  → Link zur Lehrveranstaltung im u:find
   
-  → Durchschnittlicher Lernzeit gewisser LVs (Daten aus dem Studo Wiki)
+  → Durchschnittliche Lernzeit; vorerst nur bei einigen LVs (Daten aus dem Studo Wiki)
   
   → Teilcurricula als PDF der Universität Wien
 
