@@ -9,11 +9,11 @@ Die Informationen zu den jeweiligen Curricula entstammen den Teilcurricula der U
 
 ## Funktionen
 
-  → Teilcurricula
+  → Auflistung der einzelnen Module & Lehrveranstaltungen der Teilcurricula (inkl. Filterfunktion nach Semester)
   
   → Link zur Lehrveranstaltung im u:find
   
-  → Durchschnittliche Lernzeit; vorerst nur bei einigen LVs (Daten aus dem Studo Wiki)
+  → Wiki mit Informationen, zb. durchschnittliche Lernzeit, Antritte, ... <em>(vorerst nur bei einigen LVs; Daten aus dem Studo Wiki)</em>
   
   → Teilcurricula als PDF der Universität Wien
 
